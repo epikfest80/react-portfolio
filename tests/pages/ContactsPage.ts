@@ -15,7 +15,7 @@ export class ContactsPage {
   }
 
   async goto() {
-    await this.page.goto('/contacts');
+    await this.page.goto('/react-portfolio/contacts');
   }
 
   async getEmailHref() {
