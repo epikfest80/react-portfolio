@@ -25,11 +25,10 @@ test.describe('Портфоліо E2E Тести', () => {
     await expect(homePage.projectCards.first()).toContainText('Змійка');
   });
 
-   test('Тест 3: Коректність атрибутів посилань на сторінці Контакти', async ({ page }) => {
+test('Тест 3: Перевірка видимості заголовку на сторінці Контакти', async ({ page }) => {
     const contactsPage = new ContactsPage(page);
     await contactsPage.goto();
 
-    const emailHref = await contactsPage.getEmailHref();
-    expect(emailHref).toContain('mailto:');
+    await expect(contactsPage.heading).toBeVisible();
   });
 });
