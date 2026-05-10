@@ -1,0 +1,40 @@
+import { test, expect } from '@playwright/test';
+import { HomePage } from './pages/HomePage';
+import { ContactsPage } from './pages/ContactsPage';
+
+test.describe('Портфоліо E2E Тести', () => {
+
+  test('Тест 1: Перевірка головного заголовку на сторінці Home', async ({ page }) => {
+    const homePage = new HomePage(page);
+    await homePage.goto();
+    
+    // Залишаємо лише перевірку головного H1 заголовка на сторінці
+    await expect(homePage.heading).toHaveText('Розробник C++ (Портной Артем)');
+  }); 
+
+  test('Тест 2: Наявність карток та робота пошуку', async ({ page }) => {
+    const homePage = new HomePage(page);
+    await homePage.goto();
+
+    // Перевіряємо, що карток більше нуля
+    expect(await homePage.projectCards.count()).toBeGreaterThan(0);
+
+    // Взаємодіємо з інпутом (Допоміжний метод)
+    await homePage.searchFor('Змійка');
+
+    // Перевіряємо, що після пошуку залишилася потрібна картка
+    await expect(homePage.projectCards.first()).toContainText('Змійка');
+  });
+
+  test('Тест 3: Коректність атрибутів посилань на сторінці Контакти', async ({ page }) => {
+    const contactsPage = new ContactsPage(page);
+    await contactsPage.goto();
+
+    // Перевіряємо наявність заголовку
+    await expect(contactsPage.heading).toContainText('Портной Артем 😎😎!');
+
+    // Перевіряємо коректність атрибуту href для email
+    const emailHref = await contactsPage.getEmailHref();
+    expect(emailHref).toBe('mailto:a.portnoj.zk41.fbmi28@lll.kpi.ua');
+  });
+});
