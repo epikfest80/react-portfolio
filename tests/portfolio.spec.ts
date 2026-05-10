@@ -19,7 +19,6 @@ test.describe('Портфоліо E2E Тести', () => {
     // Перевіряємо, що карток більше нуля
     expect(await homePage.projectCards.count()).toBeGreaterThan(0);
 
-    // Взаємодіємо з інпутом (Допоміжний метод)
     await homePage.searchFor('Змійка');
 
     // Перевіряємо, що після пошуку залишилася потрібна картка
