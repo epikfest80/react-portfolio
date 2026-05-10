@@ -25,10 +25,10 @@ test.describe('Портфоліо E2E Тести', () => {
     await expect(homePage.projectCards.first()).toContainText('Змійка');
   });
 
-test('Тест 3: Перевірка видимості заголовку на сторінці Контакти', async ({ page }) => {
-    const contactsPage = new ContactsPage(page);
-    await contactsPage.goto();
+test('Тест 3: Перевірка атрибута у полі пошуку (Home)', async ({ page }) => {
+    const homePage = new HomePage(page);
+    await homePage.goto();
 
-    await expect(contactsPage.heading).toBeVisible();
+    await expect(homePage.searchInput).toHaveAttribute('placeholder', 'Шукати за назвою або тегом...');
   });
 });
